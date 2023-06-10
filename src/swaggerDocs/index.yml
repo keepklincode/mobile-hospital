@@ -1,0 +1,45 @@
+paths: 
+  /signup: # path of the collection from your endpoint
+    post: # endpoint request type (post request)
+      tags: # Tag property
+        - Authentication # Value of the tag
+      summary: Registration end-point
+      produces:
+        - application/json
+      parameters:
+        - in: body 
+          name: User registrastion
+          description: User registration
+          required: true 
+          schema: # Schema definition
+            $ref: '#/definitions/userRegistration'
+      responses: # server responses
+        200:
+          description: should return successful
+
+  
+
+
+
+
+
+
+
+
+
+definitions: # Schema definition for request body
+  userRegistration:
+    type: object
+    properties:
+      fullName:
+        type: String
+        default: "Emmanuel Clark"
+      hospital:
+        type: String
+        default: "St. John Secondary School"
+      email:
+        type: String
+        default: test@gmail.com
+      password:
+        type: String
+        default: "Save a life hospital Rapoor junction Amakaohia"          
