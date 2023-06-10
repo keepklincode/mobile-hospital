@@ -6,7 +6,7 @@ const swagger = {
   swaggerDefinition: {
     info: {
       version: "2.0.0",
-      title: "Hospital Tracker",
+      title: "Mobile Hospital",
       contact: { name: "Edi Christian" },
       servers: [{ url: `http://localhost:${port}` }],
     },

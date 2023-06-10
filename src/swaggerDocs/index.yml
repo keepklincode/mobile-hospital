@@ -17,12 +17,6 @@ paths:
         200:
           description: should return successful
 
-  
-
-
-
-
-
 
 
 
@@ -36,7 +30,7 @@ definitions: # Schema definition for request body
         default: "Emmanuel Clark"
       hospital:
         type: String
-        default: "St. John Secondary School"
+        default: "Save a life hospital"
       email:
         type: String
         default: test@gmail.com
