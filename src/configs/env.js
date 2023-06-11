@@ -8,6 +8,7 @@ const schema = Joi.object({
     .default("development"),
   PORT: Joi.number().required(),
   SECRET: Joi.string().required(),
+  DATABASE: Joi.string().required(),
 })
   .unknown()
   .required();
