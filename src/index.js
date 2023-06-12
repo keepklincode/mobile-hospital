@@ -6,11 +6,11 @@ const formData = require("express-form-data");
 const swaggerUi = require("swagger-ui-express");
 
 const routes = require("./routes");
-const { env, swagger } = require("./configs");
+const { env, swagger, db } = require("./configs");
 
 const app = express();
 const server = http.createServer(app);
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 3000;
 
 app.set("trust proxy", 1);
 

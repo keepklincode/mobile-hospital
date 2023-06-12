@@ -23,7 +23,7 @@ if (error) {
 const config = {
   env: env.NODE_ENV,
   port: env.PORT,
-  dbURL: env.DB_URL,
+  dbURL: env.DATABASE,
 };
 
 module.exports = config;
