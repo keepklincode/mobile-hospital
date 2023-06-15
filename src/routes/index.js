@@ -1,11 +1,11 @@
-const { Router } = require("express");
+const express = require("express");
 const { response } = require("../helpers");
 const homeRoute  = require("../controllers");
 const { validate } = require("../middlewares");
 const { auth} = require("../validator");
 
 
-const routes = Router();
+const routes = express.Router();
 
 
 routes.get("/", homeRoute.welcomePage);

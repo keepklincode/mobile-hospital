@@ -6,7 +6,7 @@ const formData = require("express-form-data");
 const swaggerUi = require("swagger-ui-express");
 
 const routes = require("./routes");
-const { env, swagger, db } = require("./configs");
+const { env, swagger } = require("./configs");
 
 const app = express();
 const server = http.createServer(app);

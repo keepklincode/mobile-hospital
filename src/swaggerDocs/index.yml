@@ -17,6 +17,25 @@ paths:
         200:
           description: should return successful
 
+  # User sign-in
+  /signin:
+    post:
+      tags:
+        - Authentication
+      summary: Logging in end-point
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: User login
+          description: User login end-point
+          required: true
+          schema: 
+            $ref: '#/definitions/userLogin'
+      responses:
+        200:
+          description: should return successful
+
 
 
 
@@ -25,7 +44,7 @@ definitions: # Schema definition for request body
   userRegistration:
     type: object
     properties:
-      fullName:
+      name:
         type: String
         default: "Emmanuel Clark"
       hospital:
@@ -36,4 +55,16 @@ definitions: # Schema definition for request body
         default: test@gmail.com
       password:
         type: String
-        default: "Save a life hospital Rapoor junction Amakaohia"          
+        default: "save"
+
+  userLogin:
+    type: object
+    properties:
+      email:
+        type: String
+        default: "test@gmail.com"
+      password:
+        type: String
+        default: "save"
+
+     

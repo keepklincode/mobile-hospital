@@ -1,3 +1,3 @@
 module.exports = {
- db: require("./db")
+ Auth: require("./auth")
 }
