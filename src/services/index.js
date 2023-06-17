@@ -5,6 +5,7 @@ const {constants} = require("../configs");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
+
 const welcomePage = async (params) => {
     
     return {
@@ -15,17 +16,27 @@ const welcomePage = async (params) => {
 };
 
 const signUp = async (params) => {
+
+    // const verificationToken = crypto.randomBytes(32).toString("hex");
   try {
-    const { name, hospital, email, password} = params;
+    const { name, phone, email, dob, password, passwordConfirm} = params;
+    if (password !== passwordConfirm) {
+        return {
+          status: false,
+          message: 'Password do not match',
+        };
+      }
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = await Auth.create({
         name,
-        hospital,
+        phone,
         email,
-        password: hashedPassword
+        dob,
+        password: hashedPassword,
+        passwordConfirm: hashedPassword
+
     });
     console.log(hashedPassword);
-    
     if(newUser){
         return {
             status: true,
@@ -33,7 +44,6 @@ const signUp = async (params) => {
             data: newUser
         }
     }
-    
   } catch (error) {
     console.log(error);
     return{
@@ -41,25 +51,21 @@ const signUp = async (params) => {
         message: constants.SERVER_ERROR("signUp")
     }
   }
-}
+};
 
 
 const signIn = async (params) => {
     try {
 
         const {email, password} = params;
-
         // Find the user in the database
         const user = await Auth.findOne({email});
-        console.log(user);
-        
         if (!user) {
             return {
                 status: false,
                 message: "Invalide email"
             }
         };
-
         // compare the provided password with stored password in the database
         const passwordMatch = await bcrypt.compare(password, user.password);
         if (!passwordMatch) {
@@ -68,13 +74,8 @@ const signIn = async (params) => {
                 message: "Invalide password"
             }
         };
-        // const generateSecretKey = () =>{
-        //     return crypto.randomBytes(32).toString("hex");
-        // };
         const secretKey = process.env.SECRET
-
         const token = jwt.sign({ userId: user._id }, secretKey)
-
         return {
             status: true,
             message: "successfully signin",
@@ -89,8 +90,31 @@ const signIn = async (params) => {
         
     }
 }
+
+const signOut = async () =>{
+    try {
+        // const token = req.headers.authorization.split(' ')[1];
+        
+        // if(token) {
+            return {
+                status: true,
+                message: "successfully signed out"
+            }
+        // }
+        
+    } catch (error) {
+        return {
+            status: true,
+            message: constants.SERVER_ERROR("signout")
+        }
+        
+    }
+}
+
+
 module.exports =  {
     welcomePage,
     signUp,
-    signIn
+    signIn,
+    signOut
 }

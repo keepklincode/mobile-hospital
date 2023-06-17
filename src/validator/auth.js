@@ -3,9 +3,11 @@ const Joi = require("joi");
 module.exports = {
     signup: {
     name: Joi.string().required(),
-    hospital: Joi.string().required(),
+    phone: Joi.number().required(),
     email: Joi.string().required(),
+    dob:  Joi.string().required(),
     password: Joi.string().required(),
+    passwordConfirm: Joi.string().required(),
   }, 
 
     signin: {

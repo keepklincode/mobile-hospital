@@ -13,5 +13,5 @@ routes.get("/", homeRoute.welcomePage);
 routes.post("/signup", validate(auth.signup),  homeRoute.signUp);
 
 routes.post("/signin", validate(auth.signin), homeRoute.signIn);
-
+routes.post("/signout", homeRoute.signOut)
 module.exports = routes;

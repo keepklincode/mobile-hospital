@@ -46,14 +46,20 @@ definitions: # Schema definition for request body
     properties:
       name:
         type: String
-        default: "Emmanuel Clark"
-      hospital:
-        type: String
-        default: "Save a life hospital"
+        default: "Emmanuel firm"
+      phone:
+        type: Number
+        default: +2348055296566
       email:
         type: String
         default: test@gmail.com
+      dob:
+        type: String
+        default: "20/11/2000"
       password:
+        type: String
+        default: "save"
+      passwordConfirm:
         type: String
         default: "save"
 
@@ -66,5 +72,6 @@ definitions: # Schema definition for request body
       password:
         type: String
         default: "save"
+      
 
      

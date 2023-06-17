@@ -10,20 +10,22 @@ const welcomePage =  async ( req, res) => {
 
 const signUp = async (req, res) =>{ 
     const data = await services.signUp(req.form);
-    
     return response(res, data)
-
 }
 
 const signIn = async (req, res) => {
     const data = await services.signIn(req.form);
     return response (res, data);
-
 }
 
+const signOut = async (req, res) =>{
+    const data = await services.signOut(req.form);
+    return response (res, data);
 
+}
 module.exports = { 
     welcomePage,
     signUp,
-    signIn
+    signIn,
+    signOut
  };
