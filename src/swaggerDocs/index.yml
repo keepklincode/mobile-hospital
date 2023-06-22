@@ -46,7 +46,7 @@ definitions: # Schema definition for request body
     properties:
       name:
         type: String
-        default: "Emmanuel firm"
+        default: "Risper Koome"
       phone:
         type: Number
         default: +2348055296566
