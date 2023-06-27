@@ -128,6 +128,24 @@ const signIn = async (params) => {
     }
 }
 
+const unboarding = async (params) => {
+    try {
+        return {
+            status: true,
+            message: "unboarded successfully",
+            data: params
+        }
+        
+    } catch (error) {
+        return {
+            status: false,
+            message: constants.SERVER_ERROR("unboarding")
+        }
+        
+    }
+
+}
+
 
 
 
@@ -135,5 +153,6 @@ module.exports =  {
     welcomePage,
     signUp,
     signIn,
+    unboarding
     
 }

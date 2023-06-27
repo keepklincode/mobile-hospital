@@ -36,6 +36,25 @@ paths:
         200:
           description: should return successful
 
+  # unboarding of user
+  /unboarding:
+    post:
+      tags:
+        - Authentication
+      summary: Unboarding of a user
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: User unboarding
+          description: Unboarding end-point
+          required: true
+          schema:
+            $ref: '#/definations/unboarding'
+      responses:
+        200:
+          description: should return successful
+
 
 
 
@@ -72,6 +91,16 @@ definitions: # Schema definition for request body
       password:
         type: String
         default: "save"
+  
+  unboarding:
+    type: object
+    properties:
+      gender:
+        type: String
+        default: "male"
+      patientId:
+        type: String
+        default: "12345"
       
 
      

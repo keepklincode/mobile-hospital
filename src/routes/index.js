@@ -13,5 +13,6 @@ routes.get("/", homeRoute.welcomePage);
 routes.post("/signup", validate(auth.signup),  homeRoute.signUp);
 
 routes.post("/signin", validate(auth.signin), homeRoute.signIn);
+routes.post("/unboarding", validate(auth.unboarding), homeRoute.unboarding)
 
 module.exports = routes;

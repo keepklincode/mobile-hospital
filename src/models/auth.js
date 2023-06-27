@@ -22,6 +22,15 @@ const userSchema = new mongoose.Schema ({
         type: String,
         required: [true, "insert your password"],
         
+    },
+    gender: {
+        type: String,
+        required: [true, "choose you gender" ]
+    },
+    patientId: {
+        type: String,
+        required: true,
+        unique: true
     }
 });
 

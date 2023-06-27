@@ -13,5 +13,11 @@ module.exports = {
     signin: {
         email: Joi.string().required(),
         password: Joi.string().required(),
-    }
+    },
+
+    unboarding: {
+      gender: Joi.string().required(),
+      patientId: Joi.string().required(),
+  },
+
 }
