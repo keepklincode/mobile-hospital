@@ -15,7 +15,7 @@ module.exports = {
         password: Joi.string().required(),
     },
 
-    unboarding: {
+    onboarding: {
       gender: Joi.string().required(),
       patientId: Joi.string().required(),
   },

@@ -128,15 +128,33 @@ const signIn = async (params) => {
     }
 }
 
-const unboarding = async (params) => {
+const onBoarding = async (params) => {
+
     try {
+        const {gender, patientId, id:authId} = params;
+        const getUser = await Auth.findOne({_id: authId})
+        if (getUser.hasOnboarded == true) {
+            return {
+                status: false,
+                message: "this user has already onboarded"
+            }
+        }
+        getUser.gender = gender;
+        getUser.patientId = patientId;
+        getUser.hasOnboarded = true
+        getUser.save();
+        
+
+        const data = globalFunctions.dataStripper(getUser);
         return {
             status: true,
             message: "unboarded successfully",
-            data: params
+            data: getUser,
+            data
         }
         
     } catch (error) {
+        console.log(error);
         return {
             status: false,
             message: constants.SERVER_ERROR("unboarding")
@@ -146,6 +164,24 @@ const unboarding = async (params) => {
 
 }
 
+const userData = async (params) =>{
+    try {
+        const fetch = fetchUserDataFromDatabase(params);
+        return {
+            status: true,
+            message: "successfull",
+            fetch
+        }
+        
+    } catch (error) {
+        return{
+            status: false,
+            message: constants.SERVER_ERROR("userData")
+        }
+        
+    }
+}
+
 
 
 
@@ -153,6 +189,7 @@ module.exports =  {
     welcomePage,
     signUp,
     signIn,
-    unboarding
+    onBoarding,
+    userData
     
 }

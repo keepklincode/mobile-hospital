@@ -37,7 +37,7 @@ paths:
           description: should return successful
 
   # unboarding of user
-  /unboarding:
+  /onboarding:
     post:
       tags:
         - Authentication
@@ -45,12 +45,17 @@ paths:
       produces:
         - application/json
       parameters:
+        - in: header
+          name: authorization
+          description: access token
+          default: serial eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfdXNlclR5cGUiOiJzY2hvb2wiLCJfZW1haWwiOiJzcGNzQGdtYWlsLmNvbSIsImlhdCI6MTY0Nzk3NTk5NiwiZXhwIjoxNjQ3OTkzOTk2fQ.c-p5B34vPn6jYgtKNOF88eGy3AwkOQXPmFhfIW9ZU8w
+          required: true
         - in: body
           name: User unboarding
           description: Unboarding end-point
           required: true
           schema:
-            $ref: '#/definations/unboarding'
+            $ref: '#/definitions/onboarding'
       responses:
         200:
           description: should return successful
@@ -92,7 +97,7 @@ definitions: # Schema definition for request body
         type: String
         default: "save"
   
-  unboarding:
+  onboarding:
     type: object
     properties:
       gender:

@@ -31,6 +31,10 @@ const userSchema = new mongoose.Schema ({
         type: String,
         required: true,
         unique: true
+    },
+    hasOnboarded:{
+        type: Boolean,
+        default: false
     }
 });
 

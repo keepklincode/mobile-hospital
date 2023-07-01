@@ -18,8 +18,14 @@ const signIn = async (req, res) => {
     return response (res, data);
 }
 
-const unboarding = async (req, res) =>{
-    const data = await  services.unboarding(req.form);
+const onBoarding = async (req, res) =>{
+    console.log(req.form)
+    const data = await  services.onBoarding(req.form);
+    return response (res, data)
+}
+
+const userData = async (req, res) =>{
+    const data = await services.userData(req.form);
     return response (res, data)
 }
 
@@ -27,5 +33,6 @@ module.exports = {
     welcomePage,
     signUp,
     signIn,
-    unboarding
+    onBoarding,
+    userData
  };
