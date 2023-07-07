@@ -166,12 +166,18 @@ const onBoarding = async (params) => {
 
 const userData = async (params) =>{
     try {
-        const fetch = fetchUserDataFromDatabase(params);
+        const {id} = (params) 
+        const fetch = await Auth.findById({_id: id});
+
+
+        if (fect){
+        // const fetch = fetchUserDataFromDatabase(params);
         return {
             status: true,
             message: "successfull",
             fetch
         }
+    }
         
     } catch (error) {
         return{
@@ -191,5 +197,4 @@ module.exports =  {
     signIn,
     onBoarding,
     userData
-    
 }

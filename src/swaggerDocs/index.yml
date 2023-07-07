@@ -60,6 +60,24 @@ paths:
         200:
           description: should return successful
 
+  # fetching user data
+  /fetchData:
+    get:
+      tags:
+        - Authentication
+      summary: Getting User data
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: fetching user data
+          description: token
+          default: serial eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfdXNlclR5cGUiOiJzY2hvb2wiLCJfZW1haWwiOiJzcGNzQGdtYWlsLmNvbSIsImlhdCI6MTY0Nzk3NTk5NiwiZXhwIjoxNjQ3OTkzOTk2fQ.c-p5B34vPn6jYgtKNOF88eGy3AwkOQXPmFhfIW9ZU8w
+          required: true
+      responses:
+        200:
+          description: should return successful
+
 
 
 

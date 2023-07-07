@@ -9,6 +9,7 @@ module.exports = (obj) => {
     
     const schema = Joi.object().keys(obj).required().unknown(false);
     let loggedInUser;
+    let fetchUser;
 
     if (req.headers.authorization){
       const token  = req.headers.authorization;
@@ -23,6 +24,7 @@ module.exports = (obj) => {
       });
       
     }
+    
   
     const value = req.method == "GET" ? req.query : req.body;
     const { error, value: vars } = schema.validate(value);

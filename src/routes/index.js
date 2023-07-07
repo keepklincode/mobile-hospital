@@ -9,10 +9,13 @@ const routes = express.Router();
 
 
 routes.get("/", homeRoute.welcomePage);
-
 routes.post("/signup", validate(auth.signup),  homeRoute.signUp);
-
 routes.post("/signin", validate(auth.signin), homeRoute.signIn);
 routes.post("/onboarding", validate(auth.onBoarding), homeRoute.onBoarding)
+
+routes.get("fetchData", validate, homeRoute.userData);
+
+
+
 
 module.exports = routes;
