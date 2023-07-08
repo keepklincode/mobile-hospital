@@ -20,4 +20,9 @@ module.exports = {
       patientId: Joi.string().required(),
   },
 
+  userData: {
+    id: Joi.string()
+    
+},
+
 }

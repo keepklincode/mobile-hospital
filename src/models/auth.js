@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema ({
     },
     patientId: {
         type: String, 
-        unique: true
+        // unique: true
     },
     hasOnboarded:{
         type: Boolean,

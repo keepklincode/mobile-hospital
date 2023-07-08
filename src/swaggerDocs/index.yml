@@ -70,23 +70,13 @@ paths:
         - application/json
       parameters:
         - in: header
-          name: Geting user data
+          name: authorization
           description: token
           default: serial eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfdXNlclR5cGUiOiJzY2hvb2wiLCJfZW1haWwiOiJzcGNzQGdtYWlsLmNvbSIsImlhdCI6MTY0Nzk3NTk5NiwiZXhwIjoxNjQ3OTkzOTk2fQ.c-p5B34vPn6jYgtKNOF88eGy3AwkOQXPmFhfIW9ZU8w
           required: true
-        - in: body
-          name: User unboarding
-          description: geting Userdata end point
-          required: true
-          schema:
-            $ref: '#/definitions/userData'
       responses:
         200:
           description: should return successful
-
-
-
-
 
 definitions: # Schema definition for request body
   userRegistration:
@@ -130,9 +120,6 @@ definitions: # Schema definition for request body
       patientId:
         type: String
         default: "12345"
-
-  userData:
-    type: object
       
 
      
