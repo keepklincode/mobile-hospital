@@ -166,20 +166,45 @@ const onBoarding = async (params) => {
 
 const userData = async (params) =>{
     try {
-        const {id} = (params) 
-        const fetch = await Auth.findById({_id: id});
 
+        const {email} = (params)
 
-        if (fect){
-        // const fetch = fetchUserDataFromDatabase(params);
-        return {
-            status: true,
-            message: "successfull",
-            fetch
-        }
+        const currentUser = await Auth.findOne({email})
+
+        const data = globalFunctions.dataStripper(currentUser);
+        const secretKey = process.env.SECRET
+        // const token = jwt.sign({ userId: user._id }, secretKey)
+        const token  = req.headers.authorization;
+       
+            
+        // Verify and decode the token
+    jwt.verify(token, secretKey, (err, decoded) => {
+    if (err) {
+      return {
+        status: false,
+        message: "Not verified"
+      }
     }
+
+    // Fetch additional user data from the database using the decoded information
+    const userData = {
+      email: decoded.email,
+      // Additional user data...
+     }
+     return {
+        status: true,
+        message: "successfully signin",
+        data,
+        userData
+        
+    }
+    
+    });
+
+        
         
     } catch (error) {
+        console.log(errior)
         return{
             status: false,
             message: constants.SERVER_ERROR("userData")

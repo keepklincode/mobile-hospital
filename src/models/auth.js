@@ -25,11 +25,9 @@ const userSchema = new mongoose.Schema ({
     },
     gender: {
         type: String,
-        required: [true, "choose you gender" ]
     },
     patientId: {
-        type: String,
-        required: true,
+        type: String, 
         unique: true
     },
     hasOnboarded:{
