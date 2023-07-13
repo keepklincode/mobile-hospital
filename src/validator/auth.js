@@ -17,12 +17,20 @@ module.exports = {
 
     onboarding: {
       gender: Joi.string().required(),
-      patientId: Joi.string().required(),
+      patientId: Joi.number().required(),
   },
 
   userData: {
     id: Joi.string()
     
 },
+
+updateUser: {
+  name: Joi.string().required(),
+  phone: Joi.number().required(),
+  email: Joi.string().required(),
+  patientId: Joi.number().required(),
+
+}
 
 }

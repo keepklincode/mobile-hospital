@@ -15,6 +15,7 @@ routes.post("/onboarding", validate(auth.onBoarding), homeRoute.onBoarding)
 
 routes.get("/userData", validate(auth.userData), homeRoute.userData);
 
+routes.put("/updateUser", validate(auth.updateUser), homeRoute.updateUser);
 
 
 

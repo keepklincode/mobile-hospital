@@ -29,10 +29,16 @@ const userData = async (req, res) =>{
     return response (res, data)
 }
 
+const updateUser = async (req, res) =>{
+    const data = await services.updateUser(req.form);
+    return response (res, data)
+}
+
 module.exports = { 
     welcomePage,
     signUp,
     signIn,
     onBoarding,
-    userData
+    userData,
+    updateUser
  };

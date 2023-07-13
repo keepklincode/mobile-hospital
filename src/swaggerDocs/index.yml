@@ -77,6 +77,30 @@ paths:
       responses:
         200:
           description: should return successful
+  
+  # Updating a user
+  /updateUser: 
+    put: 
+      tags: 
+        - Authentication 
+      summary: User update end-point
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: authorization
+          description: access token
+          default: serial eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfdXNlclR5cGUiOiJzY2hvb2wiLCJfZW1haWwiOiJzcGNzQGdtYWlsLmNvbSIsImlhdCI6MTY0Nzk3NTk5NiwiZXhwIjoxNjQ3OTkzOTk2fQ.c-p5B34vPn6jYgtKNOF88eGy3AwkOQXPmFhfIW9ZU8w
+          required: true
+        - in: body 
+          name: User-update
+          description: User update
+          required: true 
+          schema: # Schema definition
+            $ref: '#/definitions/updateUser'
+      responses: # server responses
+        200:
+          description: should return successful
 
 definitions: # Schema definition for request body
   userRegistration:
@@ -118,8 +142,24 @@ definitions: # Schema definition for request body
         type: String
         default: "male"
       patientId:
+        type: Number
+        default: 12345
+  
+  updateUser:
+    type: object
+    properties:
+      name:
         type: String
-        default: "12345"
+        default: "Risper Koome"
+      phone:
+        type: Number
+        default: +2348055296566
+      email:
+        type: String
+        default: test@gmail.com
+      patientId:
+        type: Number
+        default: 12345
       
 
      
