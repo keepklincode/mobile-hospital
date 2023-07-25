@@ -17,6 +17,8 @@ routes.get("/userData", validate(auth.userData), homeRoute.userData);
 
 routes.put("/updateUser", validate(auth.updateUser), homeRoute.updateUser);
 
+routes.delete("/deleteUser", validate(auth.deleteUser), homeRoute.deleteUser);
+
 
 
 module.exports = routes;

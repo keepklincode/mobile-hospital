@@ -101,6 +101,24 @@ paths:
       responses: # server responses
         200:
           description: should return successful
+  
+  # fetching user data
+  /deleteUser:
+    delete:
+      tags:
+        - Authentication
+      summary: Deleting a user
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: authorization
+          description: token
+          default: serial eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfdXNlclR5cGUiOiJzY2hvb2wiLCJfZW1haWwiOiJzcGNzQGdtYWlsLmNvbSIsImlhdCI6MTY0Nzk3NTk5NiwiZXhwIjoxNjQ3OTkzOTk2fQ.c-p5B34vPn6jYgtKNOF88eGy3AwkOQXPmFhfIW9ZU8w
+          required: true
+      responses:
+        200:
+          description: should return successful
 
 definitions: # Schema definition for request body
   userRegistration:
@@ -148,16 +166,16 @@ definitions: # Schema definition for request body
   updateUser:
     type: object
     properties:
-      name:
+      Name:
         type: String
         default: "Risper Koome"
-      phone:
+      Phone:
         type: Number
         default: +2348055296566
-      email:
+      Email:
         type: String
         default: test@gmail.com
-      patientId:
+      PatientId:
         type: Number
         default: 12345
       

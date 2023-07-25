@@ -175,69 +175,69 @@ const userData = async (params) => {
 };
 
 const updateUser = async (params) => {
-  // console.log
   try {
-    // // const {email, name, patientId, phone, id} = params;
-    // const { id} = params;
-    // const userUpdated = await Auth.findByIdAndUpdate({ _id: id });
 
-    // // console.log(userUpdate)
-    // if (!userUpdated) {
-    //   return {
-    //     status: false,
-    //     message: "user not found",
-    //   };
-    // }
-    
-    // userUpdated.email = email,
-    // // userUpdated.name = name,
-    // userUpdated.patientId = patientId,
-    // userUpdated.phone = phone,
-    // userUpdated.save();
+  const { id, Name, Email, PatientId, Phone} = params;
+  console.log(params);
+console.log("Updating user with ID:", id);
+console.log(Name);
 
-// return{
-//     status: true,
-//     message: "successful",
-//     userUpdated
-    
-// }
 
-const { id, email, name, patientId, phone } = params;
-    
 // Find the user in the database
 const existingUser = await Auth.findOne({ _id: id });
 
-
-if (!existingUser) {
-  return {
-    status: false,
-    message: "User not found",
-  };
-}
-
 // Update the user data
-existingUser.email = email || existingUser.email;
-existingUser.name = name || existingUser.name;
-existingUser.patientId = patientId || existingUser.patientId;
-existingUser.phone = phone || existingUser.phone;
+existingUser.email = Email || existingUser.email;
+existingUser.name = Name || existingUser.name;
+existingUser.patientId = PatientId || existingUser.patientId;
+existingUser.phone = Phone || existingUser.phone;
 
 // Save the updated user
 await existingUser.save();
+
 const data = globalFunctions.dataStripper(existingUser);
-console.log(existingUser)
+
+console.log(data);
 return {
   status: true,
   message: "User data updated successfully",
-  existingUser,
   data
 };
+
   } catch (error) {
+    console.log(error);
     return {
       status: false,
       message: constants.SERVER_ERROR("userData"),
     };
   }
 };
+
+const deleteUser = async (params) =>{
+  console.log(params)
+ try {
+  const {id} = params
+  const user = await Auth.findByIdAndDelete({_id: id});
+
+    if (!user) {
+      return { status: false, message: "User not found" };
+    }
+
+  return {
+    status: true,
+    message: "succefully deleted"
+  }
+ } catch (error) {
+  console.log(error)
+  return {
+    status: false,
+    message: constants.SERVER_ERROR("deleteUser"),
+  };
+  
+ }
+
+}
+
 
 module.exports = {
   welcomePage,
@@ -246,4 +246,5 @@ module.exports = {
   onBoarding,
   userData,
   updateUser,
+  deleteUser
 };

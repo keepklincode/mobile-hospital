@@ -26,11 +26,15 @@ module.exports = {
 },
 
 updateUser: {
-  name: Joi.string().required(),
-  phone: Joi.number().required(),
-  email: Joi.string().required(),
-  patientId: Joi.number().required(),
+  Name: Joi.string(),
+  Phone: Joi.number(),
+  Email: Joi.string(),
+  PatientId: Joi.number()
 
+},
+
+deleteUser: {
+  id: Joi.string()
 }
 
 }

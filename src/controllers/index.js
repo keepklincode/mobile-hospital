@@ -34,11 +34,18 @@ const updateUser = async (req, res) =>{
     return response (res, data)
 }
 
+const deleteUser = async (req, res) => {
+    console.log(req.form);
+    const data = await services.deleteUser(req.form);
+    return response (res, data)
+}
+
 module.exports = { 
     welcomePage,
     signUp,
     signIn,
     onBoarding,
     userData,
-    updateUser
+    updateUser,
+    deleteUser
  };
