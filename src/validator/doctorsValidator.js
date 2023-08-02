@@ -8,5 +8,10 @@ module.exports = {
         gender: Joi.string().required(),
         password: Joi.string().required(),
         passwordConfirm: Joi.string().required()
+    },
+
+    doctorsSignin: {
+        email: Joi.string().required(),
+        password: Joi.string().required()
     }
 }

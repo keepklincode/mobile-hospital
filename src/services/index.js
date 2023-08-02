@@ -84,6 +84,7 @@ const signIn = async (params) => {
 
     // compare the provided password with stored password in the database
     const passwordMatch = await bcrypt.compare(password, existingUser.password);
+    // console.log(passwordMatch)
     if (!passwordMatch) {
       return {
         status: false,
@@ -102,7 +103,6 @@ const signIn = async (params) => {
       },
       secretKey
     );
-    console.log(data);
 
     return {
       status: true,
@@ -111,7 +111,6 @@ const signIn = async (params) => {
       data,
     };
   } catch (error) {
-    console.log(error);
     return {
       status: false,
       message: constants.SERVER_ERROR("signin"),

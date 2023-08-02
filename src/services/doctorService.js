@@ -62,6 +62,61 @@ const doctorsSignup = async (params) => {
   }
 };
 
+const doctorsSignin = async (params) => {
+  try {
+    const {email, password} = params;
+
+    const existingUser = await DoctorModel.findOne({email});
+    console.log(existingUser)
+
+    if(!existingUser){{
+      return {
+        status: false,
+        message: "invalide email"
+      }
+    }}
+
+    const passwordMatch = await bcrypt.compare(password, existingUser.password); 
+    console.log(passwordMatch)
+    console.log(password)
+    if (!passwordMatch) {
+      return {
+        status: false,
+        message: "invalid password"
+      }
+    }
+
+    const data = globalFunctions.dataStripper(existingUser);
+    const secretKey = process.env.SECRET;
+
+    const token = jwt.sign(
+      {
+      id: existingUser.id,
+      email: existingUser.email,
+      name: existingUser.name
+    },
+    secretKey
+    );
+    console.log(token);
+
+    return {
+      status: true,
+      message: "successfully signin",
+      token,
+      data
+    }
+    
+  } catch (error) {
+    console.log(error);
+    return {
+      status: false,
+      message: constants.SERVER_ERROR("doctorsSignin")
+    }
+    
+  }
+}
+
 module.exports = {
   doctorsSignup,
+  doctorsSignin
 };

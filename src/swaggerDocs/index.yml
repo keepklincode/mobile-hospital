@@ -144,6 +144,7 @@ paths:
         200:
           description: should return successful
 
+
   # Creating Doctors record
   /doctorsSignup: # path of the collection from your endpoint
     post: # endpoint request type (post request)
@@ -160,6 +161,23 @@ paths:
           schema: # Schema definition
             $ref: '#/definitions/doctorsRegistration'
       responses: # server responses
+        200:
+          description: should return successful
+  /doctorsSignin:
+    post:
+      tags:
+        - Doctors Authentication
+      summary: Doctors login
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: Doctors login
+          description: Doctors login end-point
+          required: true
+          schema: 
+            $ref: '#/definitions/doctorsSignin'
+      responses:
         200:
           description: should return successful
 
@@ -222,6 +240,7 @@ definitions: # Schema definition for request body
         type: Number
         default: 12345
   
+  # Appointment definition
   appointment:
     type: object
     properties:
@@ -232,6 +251,7 @@ definitions: # Schema definition for request body
         type: String
         default: ""
 
+  # Doctor Data
   doctorsRegistration:
     type: object
     properties:
@@ -251,6 +271,16 @@ definitions: # Schema definition for request body
         type: String
         default: "save"
       passwordConfirm:
+        type: String
+        default: "save"
+
+  doctorsSignin:
+    type: object
+    properties:
+      email:
+        type: String
+        default: "doctor@gmail.com"
+      password:
         type: String
         default: "save"
   

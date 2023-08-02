@@ -26,7 +26,8 @@ routes.delete("/deleteUser", validate(auth.deleteUser), homeRoute.deleteUser);
 routes.post("/appointment", validate(appointment.createAppointment), appointmentController.createAppointment);
 
 // Doctor Route
-routes.post("/doctorsSignup", validate(doctorsValidator.doctorsSignup), doctorController.doctorsSignup)
+routes.post("/doctorsSignup", validate(doctorsValidator.doctorsSignup), doctorController.doctorsSignup);
+routes.post("/doctorsSignin", validate(doctorsValidator.doctorsSignin), doctorController.doctorsSignin);
 
 
 
