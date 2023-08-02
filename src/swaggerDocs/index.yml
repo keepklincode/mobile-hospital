@@ -120,6 +120,49 @@ paths:
         200:
           description: should return successful
 
+  # Creating appointment
+  /appointment: 
+    post: 
+      tags: 
+        - Creating Appointment
+      summary: Create appointment
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: authorization
+          description: access token
+          default: serial eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfdXNlclR5cGUiOiJzY2hvb2wiLCJfZW1haWwiOiJzcGNzQGdtYWlsLmNvbSIsImlhdCI6MTY0Nzk3NTk5NiwiZXhwIjoxNjQ3OTkzOTk2fQ.c-p5B34vPn6jYgtKNOF88eGy3AwkOQXPmFhfIW9ZU8w
+          required: true
+        - in: body 
+          name: Create appointment
+          description: User Appointment
+          required: true 
+          schema: # Schema definition
+            $ref: '#/definitions/appointment'
+      responses: # server responses
+        200:
+          description: should return successful
+
+  # Creating Doctors record
+  /doctorsSignup: # path of the collection from your endpoint
+    post: # endpoint request type (post request)
+      tags: # Tag property
+        - Doctors Authentication # Value of the tag
+      summary: Registration end-point
+      produces:
+        - application/json
+      parameters:
+        - in: body 
+          name: Doctor registrastion
+          description: Doctors registration
+          required: true 
+          schema: # Schema definition
+            $ref: '#/definitions/doctorsRegistration'
+      responses: # server responses
+        200:
+          description: should return successful
+
 definitions: # Schema definition for request body
   userRegistration:
     type: object
@@ -178,6 +221,37 @@ definitions: # Schema definition for request body
       PatientId:
         type: Number
         default: 12345
-      
+  
+  appointment:
+    type: object
+    properties:
+      appointmentDate:
+        type: Date
+        default: Date.now()
+      appointmentTime:
+        type: String
+        default: ""
 
+  doctorsRegistration:
+    type: object
+    properties:
+      name:
+        type: String
+        default: "Chibuike N"
+      phone:
+        type: Number
+        default: +2348055296566
+      email:
+        type: String
+        default: doctor@gmail.com
+      gender:
+        type: String
+        default: "20/11/2000"
+      password:
+        type: String
+        default: "save"
+      passwordConfirm:
+        type: String
+        default: "save"
+  
      

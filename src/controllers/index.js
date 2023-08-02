@@ -1,6 +1,5 @@
 const { response } = require("../helpers");
 const services = require("../services");
-const {User} = require("../models");
 
 
 const welcomePage =  async ( req, res) => {
@@ -40,6 +39,11 @@ const deleteUser = async (req, res) => {
     return response (res, data)
 }
 
+// const createAppointment =  async (req, res) =>{ 
+//     const data = await appointment.createAppointment(req.form);
+//     return response(res, data)
+// }
+
 module.exports = { 
     welcomePage,
     signUp,
@@ -47,5 +51,6 @@ module.exports = {
     onBoarding,
     userData,
     updateUser,
-    deleteUser
+    deleteUser,
+    // createAppointment
  };
