@@ -177,10 +177,6 @@ const updateUser = async (params) => {
   try {
 
   const { id, Name, Email, PatientId, Phone} = params;
-  console.log(params);
-console.log("Updating user with ID:", id);
-console.log(Name);
-
 
 // Find the user in the database
 const existingUser = await Auth.findOne({ _id: id });
@@ -195,8 +191,6 @@ existingUser.phone = Phone || existingUser.phone;
 await existingUser.save();
 
 const data = globalFunctions.dataStripper(existingUser);
-
-console.log(data);
 return {
   status: true,
   message: "User data updated successfully",

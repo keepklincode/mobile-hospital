@@ -1,4 +1,4 @@
-paths: 
+paths:
   /signup: # path of the collection from your endpoint
     post: # endpoint request type (post request)
       tags: # Tag property
@@ -7,12 +7,12 @@ paths:
       produces:
         - application/json
       parameters:
-        - in: body 
+        - in: body
           name: User registrastion
           description: User registration
-          required: true 
+          required: true
           schema: # Schema definition
-            $ref: '#/definitions/userRegistration'
+            $ref: "#/definitions/userRegistration"
       responses: # server responses
         200:
           description: should return successful
@@ -30,8 +30,8 @@ paths:
           name: User login
           description: User login end-point
           required: true
-          schema: 
-            $ref: '#/definitions/userLogin'
+          schema:
+            $ref: "#/definitions/userLogin"
       responses:
         200:
           description: should return successful
@@ -55,7 +55,7 @@ paths:
           description: Unboarding end-point
           required: true
           schema:
-            $ref: '#/definitions/onboarding'
+            $ref: "#/definitions/onboarding"
       responses:
         200:
           description: should return successful
@@ -77,12 +77,12 @@ paths:
       responses:
         200:
           description: should return successful
-  
+
   # Updating a user
-  /updateUser: 
-    put: 
-      tags: 
-        - Authentication 
+  /updateUser:
+    put:
+      tags:
+        - Authentication
       summary: User update end-point
       produces:
         - application/json
@@ -92,16 +92,16 @@ paths:
           description: access token
           default: serial eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfdXNlclR5cGUiOiJzY2hvb2wiLCJfZW1haWwiOiJzcGNzQGdtYWlsLmNvbSIsImlhdCI6MTY0Nzk3NTk5NiwiZXhwIjoxNjQ3OTkzOTk2fQ.c-p5B34vPn6jYgtKNOF88eGy3AwkOQXPmFhfIW9ZU8w
           required: true
-        - in: body 
+        - in: body
           name: User-update
           description: User update
-          required: true 
+          required: true
           schema: # Schema definition
-            $ref: '#/definitions/updateUser'
+            $ref: "#/definitions/updateUser"
       responses: # server responses
         200:
           description: should return successful
-  
+
   # fetching user data
   /deleteUser:
     delete:
@@ -121,9 +121,9 @@ paths:
           description: should return successful
 
   # Creating appointment
-  /appointment: 
-    post: 
-      tags: 
+  /appointment:
+    post:
+      tags:
         - Creating Appointment
       summary: Create appointment
       produces:
@@ -132,18 +132,17 @@ paths:
         - in: header
           name: authorization
           description: access token
-          default: serial eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfdXNlclR5cGUiOiJzY2hvb2wiLCJfZW1haWwiOiJzcGNzQGdtYWlsLmNvbSIsImlhdCI6MTY0Nzk3NTk5NiwiZXhwIjoxNjQ3OTkzOTk2fQ.c-p5B34vPn6jYgtKNOF88eGy3AwkOQXPmFhfIW9ZU8w
+          default: 
           required: true
-        - in: body 
+        - in: body
           name: Create appointment
           description: User Appointment
-          required: true 
+          required: true
           schema: # Schema definition
-            $ref: '#/definitions/appointment'
+            $ref: "#/definitions/appointment"
       responses: # server responses
         200:
           description: should return successful
-
 
   # Creating Doctors record
   /doctorsSignup: # path of the collection from your endpoint
@@ -154,12 +153,12 @@ paths:
       produces:
         - application/json
       parameters:
-        - in: body 
+        - in: body
           name: Doctor registrastion
           description: Doctors registration
-          required: true 
+          required: true
           schema: # Schema definition
-            $ref: '#/definitions/doctorsRegistration'
+            $ref: "#/definitions/doctorsRegistration"
       responses: # server responses
         200:
           description: should return successful
@@ -175,9 +174,92 @@ paths:
           name: Doctors login
           description: Doctors login end-point
           required: true
-          schema: 
-            $ref: '#/definitions/doctorsSignin'
+          schema:
+            $ref: "#/definitions/doctorsSignin"
       responses:
+        200:
+          description: should return successful
+  
+  # Fetching Doctors data
+  /doctorsData:
+    get:
+      tags:
+        - Doctors Authentication
+      summary: Getting Doctors data
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: authorization
+          description: token
+          default: 
+          required: true
+      responses:
+        200:
+          description: should return successful
+
+  # Updating Doctors record
+  /doctorsUpdate:
+    put:
+      tags:
+        - Doctors Authentication
+      summary: Doctors update end-point
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: authorization
+          description: access token
+          default: 
+          required: true
+        - in: body
+          name: Doctors-update
+          description: Doctors update
+          required: true
+          schema: # Schema definition
+            $ref: "#/definitions/doctorsUpdate"
+      responses: # server responses
+        200:
+          description: should return successful
+
+  # Deleting doctors  record
+  /doctorsDelete:
+    delete:
+      tags:
+        - Doctors Authentication
+      summary: Deleting Doctors data
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: authorization
+          description: token
+          default: 
+          required: true
+      responses:
+        200:
+          description: should return successful
+
+  /available: # path of the collection from your endpoint
+    post:
+      tags:
+        - Availability
+      summary: Available doctor
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: authorization
+          description: access token
+          default: 
+          required: true
+        - in: body
+          name: check available
+          description: Availability End-point
+          required: true
+          schema: # Schema definition
+            $ref: "#/definitions/available"
+      responses: # server responses
         200:
           description: should return successful
 
@@ -213,7 +295,7 @@ definitions: # Schema definition for request body
       password:
         type: String
         default: "save"
-  
+
   onboarding:
     type: object
     properties:
@@ -223,7 +305,7 @@ definitions: # Schema definition for request body
       patientId:
         type: Number
         default: 12345
-  
+
   updateUser:
     type: object
     properties:
@@ -239,19 +321,25 @@ definitions: # Schema definition for request body
       PatientId:
         type: Number
         default: 12345
-  
+
   # Appointment definition
   appointment:
     type: object
     properties:
+      doctorId:
+        type: String
+        default: ""
       appointmentDate:
-        type: Date
-        default: Date.now()
-      appointmentTime:
+        type: String
+        default: ""
+      appointmentStartTime:
+        type: String
+        default: ""
+      appointmentEndTime:
         type: String
         default: ""
 
-  # Doctor Data
+  # Doctor Definition
   doctorsRegistration:
     type: object
     properties:
@@ -283,5 +371,28 @@ definitions: # Schema definition for request body
       password:
         type: String
         default: "save"
+
+  doctorsUpdate:
+    type: object
+    properties:
+      Name:
+        type: String
+        default: "Risper Koome"
+      Phone:
+        type: Number
+        default: +2348055296566
+      Email:
+        type: String
+        default: test@gmail.com
+
+  available:
+    type: object
+    properties:
+      startingTime:
+        type: String
+        default: ""
+      endingTime:
+        type: String
+        default: ""
   
-     
+        

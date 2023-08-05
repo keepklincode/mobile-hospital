@@ -2,7 +2,9 @@ const Joi = require("joi");
 
 module.exports = {
     createAppointment: {
-        appointmentDate: Joi.date().required(),
-        appointmentTime: Joi.string().required()
+        appointmentDate: Joi.string().required(),
+        appointmentStartTime: Joi.string().required(),
+        appointmentEndTime: Joi.string().required(),
+        doctorId: Joi.string().required(),
     }
 }

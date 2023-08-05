@@ -13,5 +13,20 @@ module.exports = {
     doctorsSignin: {
         email: Joi.string().required(),
         password: Joi.string().required()
+    },
+
+    doctorsUpdate: {
+        Name: Joi.string().required(),
+        Email: Joi.string().required(),
+        Phone: Joi.number().required(),
+        Gender: Joi.string().required(),
+    },
+
+    doctorsData: {
+        id: Joi.string()
+    },
+
+    doctorsDelete: {
+        id: Joi.string()
     }
 }

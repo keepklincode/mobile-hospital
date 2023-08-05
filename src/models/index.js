@@ -1,5 +1,6 @@
 module.exports = {
  Auth: require("./auth"),
  Appointment: require("./appointment"),
- DoctorModel: require("./doctorModel")
+ Doctor: require("./doctorModel"),
+ Available: require("./availableModel")
 }
