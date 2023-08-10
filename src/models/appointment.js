@@ -10,8 +10,9 @@ const appointmentSchema = new mongoose.Schema({
     required: true,
   },
   appointmentDate: {
-    type: String,
+    type: Date,
     required: true,
+    format: "YYYY-MM-DD"
   },
   appointmentStartTime: {
     type: String,

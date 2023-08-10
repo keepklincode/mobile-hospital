@@ -7,7 +7,7 @@ const {availableServices} = require("../services/avaibleServices");
 
 const createAppointment = async (params) => {
   try {
-    const { id, doctorId, appointmentDate, appointmentStartTime, appointmentEndTime } = params;
+    const { id, doctorId, appointmentDate, appointmentStartTime, appointmentEndTime, email} = params;
 
     const checkDr = await Doctor.findOne({_id: doctorId});
     if  (!checkDr){
@@ -16,13 +16,26 @@ const createAppointment = async (params) => {
         message: "Invalid doctor's Id"
       }
     }
-    const checkUser = await Auth.findOne({_id: id});
+    const checkUser = await Auth.findOne({email});
     if (!checkUser){
       return {
         status: false,
-        message: "Invalid user's Id"
+        message: "Invalid Access token"
       }
     }
+    const appointmentDayOfWeek = new Date(appointmentDate).getDay();
+    if (appointmentDayOfWeek === 0 || appointmentDayOfWeek === 6) {
+      return {
+        status: false,
+        message: "Appointments are not available on weekends",
+      };
+    }
+  if (appointmentStartTime < "08:00" || appointmentEndTime > "17:30") {
+    return {
+      status: false,
+      message: "Cannot make appointment within this Hour"
+    }
+  }
     const checkAvailableDr = await Available.findOne({
       doctorsId: doctorId,
       availableDate: appointmentDate,

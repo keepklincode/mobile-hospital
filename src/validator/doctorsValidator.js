@@ -3,6 +3,7 @@ const Joi = require("joi");
 module.exports = {
     doctorsSignup: {
         name: Joi.string().required(),
+        profession: Joi.string().required(),
         email: Joi.string().required(),
         phone: Joi.number().required(),
         gender: Joi.string().required(),
@@ -17,6 +18,7 @@ module.exports = {
 
     doctorsUpdate: {
         Name: Joi.string().required(),
+        Profession: Joi.string().required(),
         Email: Joi.string().required(),
         Phone: Joi.number().required(),
         Gender: Joi.string().required(),
@@ -27,6 +29,10 @@ module.exports = {
     },
 
     doctorsDelete: {
+        id: Joi.string()
+    },
+
+    getAllDoctors: {
         id: Joi.string()
     }
 }

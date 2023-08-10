@@ -149,6 +149,28 @@ const onBoarding = async (params) => {
   }
 };
 
+const getAllUser = async (params) => {
+  try {
+    let users = params
+    users = await Auth.find();
+    const data = globalFunctions.dataStripper(users);
+    if (users){
+      return {
+        status: true,
+        message: "Users found",
+        users,
+        data
+      }
+    }
+  } catch (error) {
+    // console.log(error)
+    return {
+      status: false,
+      message: constants.SERVER_ERROR("getAllUser"),
+    };
+  }
+}
+
 const userData = async (params) => {
   console.log(params);
 
@@ -233,6 +255,7 @@ const deleteUser = async (params) =>{
 
 
 module.exports = {
+  getAllUser,
   welcomePage,
   signUp,
   signIn,

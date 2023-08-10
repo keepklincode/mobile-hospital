@@ -18,6 +18,7 @@ routes.post("/signin", validate(auth.signin), homeRoute.signIn);
 routes.post("/onboarding", validate(auth.onBoarding), homeRoute.onBoarding);
 
 routes.get("/userData", validate(auth.userData), homeRoute.userData);
+routes.get("/getAllUser", validate(auth.getAllUser), homeRoute.getAllUser);
 
 routes.put("/updateUser", validate(auth.updateUser), homeRoute.updateUser);
 
@@ -29,8 +30,11 @@ routes.post("/appointment", validate(appointment.createAppointment), appointment
 // Doctor Route
 routes.post("/doctorsSignup", validate(doctorsValidator.doctorsSignup), doctorController.doctorsSignup);
 routes.post("/doctorsSignin", validate(doctorsValidator.doctorsSignin), doctorController.doctorsSignin);
+routes.get("/getAllDoctors", validate(doctorsValidator.getAllDoctors), doctorController.getAllDoctors);
+
 
 routes.put("/doctorsUpdate", validate(doctorsValidator.doctorsUpdate), doctorController.doctorsUpdate);
+
 
 routes.get("/doctorsData", validate(doctorsValidator.doctorsData), doctorController.doctorsData);
 

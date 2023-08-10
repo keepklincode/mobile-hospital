@@ -5,6 +5,10 @@ const doctorsSchema = new mongoose.Schema({
     type: String,
     required: [true, "Name is needed"],
   },
+  profession: {
+    type: String,
+    required: true
+  },
   phone: {
     type: Number,
     required: [true, "Phone number is needed"],

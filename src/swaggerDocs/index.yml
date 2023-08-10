@@ -120,6 +120,17 @@ paths:
         200:
           description: should return successful
 
+  /getAllUser:
+    get:
+      tags:
+        - Authentication
+      summary: Geting a user
+      produces:
+        - application/json
+      responses:
+        200:
+          description: should return successful
+
   # Creating appointment
   /appointment:
     post:
@@ -132,7 +143,7 @@ paths:
         - in: header
           name: authorization
           description: access token
-          default: 
+          default:
           required: true
         - in: body
           name: Create appointment
@@ -162,6 +173,7 @@ paths:
       responses: # server responses
         200:
           description: should return successful
+
   /doctorsSignin:
     post:
       tags:
@@ -179,7 +191,20 @@ paths:
       responses:
         200:
           description: should return successful
-  
+
+
+  /getAllDoctors:
+    get:
+      tags:
+        - Doctors Authentication
+      summary: Geting a user
+      produces:
+        - application/json
+      responses:
+        200:
+          description: should return successful
+
+
   # Fetching Doctors data
   /doctorsData:
     get:
@@ -192,7 +217,7 @@ paths:
         - in: header
           name: authorization
           description: token
-          default: 
+          default:
           required: true
       responses:
         200:
@@ -210,7 +235,7 @@ paths:
         - in: header
           name: authorization
           description: access token
-          default: 
+          default:
           required: true
         - in: body
           name: Doctors-update
@@ -234,7 +259,7 @@ paths:
         - in: header
           name: authorization
           description: token
-          default: 
+          default:
           required: true
       responses:
         200:
@@ -251,7 +276,7 @@ paths:
         - in: header
           name: authorization
           description: access token
-          default: 
+          default:
           required: true
         - in: body
           name: check available
@@ -330,8 +355,8 @@ definitions: # Schema definition for request body
         type: String
         default: ""
       appointmentDate:
-        type: String
-        default: ""
+        type: Date
+        default: "2023-09-11"
       appointmentStartTime:
         type: String
         default: ""
@@ -352,6 +377,9 @@ definitions: # Schema definition for request body
       email:
         type: String
         default: doctor@gmail.com
+      profession:
+        type: String
+        default: General Practitioner
       gender:
         type: String
         default: "20/11/2000"
@@ -388,11 +416,12 @@ definitions: # Schema definition for request body
   available:
     type: object
     properties:
-      startingTime:
+      availableDate:
+        type: Date
+        default: "2023-08-11"
+      availableStartTime:
         type: String
         default: ""
-      endingTime:
+      availableEndTime:
         type: String
         default: ""
-  
-        

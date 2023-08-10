@@ -7,7 +7,7 @@ const { globalFunctions } = require("../helpers");
 
 const doctorsSignup = async (params) => {
   try {
-    const { name, email, phone, gender, password, passwordConfirm} = params;
+    const { name, email, phone, gender, profession, password, passwordConfirm} = params;
 
     if (password !== passwordConfirm) {
       return {
@@ -27,6 +27,7 @@ const doctorsSignup = async (params) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     const newDoctor = await Doctor.create({
       name,
+      profession,
       email,
       phone,
       gender,
@@ -61,6 +62,30 @@ const doctorsSignup = async (params) => {
     };
   }
 };
+
+const getAllDoctors = async (params) => {
+  try {
+      let doctors = params;
+
+      doctors = await Doctor.find();
+      const data = globalFunctions.dataStripper(doctors);
+      if(doctors){
+        return {
+          status: true,
+          message: "Doctors found",
+          doctors,
+          data
+        }
+      }
+    
+  } catch (error) {
+    return {
+      status: false,
+      messsage: constants.SERVER_ERROR("getAllDoctors")
+    }
+    
+  }
+}
 
 const doctorsSignin = async (params) => {
   try {
@@ -141,11 +166,12 @@ const doctorsData = async (params) =>{
 // Updatting Doctors Data
 const doctorsUpdate = async (params) => {
   try {
-    const {Name, Phone, Email, Gender, id} = params;
+    const {Name, Phone, Email, Gender, Profession, id} = params;
 
     const existingDoctor = await DoctorModel.findOne({_id: id})
 
     existingDoctor.name = Name,
+    existingDoctor.profession = Profession,
     existingDoctor.phone = Phone,
     existingDoctor.email = Email,
     existingDoctor.gender = Gender,
@@ -199,6 +225,7 @@ const doctorsDelete = async (params) =>{
   }
 }
 module.exports = {
+  getAllDoctors,
   doctorsSignup,
   doctorsSignin,
   doctorsUpdate,

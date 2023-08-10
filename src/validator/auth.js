@@ -35,6 +35,10 @@ updateUser: {
 
 deleteUser: {
   id: Joi.string()
+},
+
+getAllUser: {
+  id: Joi.string()
 }
 
 }

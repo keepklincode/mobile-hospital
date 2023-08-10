@@ -2,7 +2,7 @@ const Joi = require("joi");
 
 module.exports = {
   availableDr: {
-        availableDate: Joi.string().required(),
+        availableDate: Joi.date().required(),
         availableStartTime: Joi.string().required(),
         availableEndTime: Joi.string().required()
   },

@@ -24,8 +24,14 @@ const doctorsData = async (req, res) => {
 const doctorsDelete = async (req, res) =>{
     const data = await doctorService.doctorsDelete(req.form);
     return response (res, data);
+};
+
+const getAllDoctors = async (req, res) =>{
+    const data = await doctorService.getAllDoctors(req.form);
+    return response (res, data);
 }
 module.exports = {
+    getAllDoctors,
     doctorsSignup,
     doctorsSignin,
     doctorsUpdate,

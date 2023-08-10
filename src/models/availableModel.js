@@ -7,8 +7,9 @@ const availableSchema = new mongoose.Schema({
     required: true,
   },
   availableDate: {
-    type: String,
+    type: Date,
     required: true,
+    format: "YYYY-MM-DD"
   },
   availableStartTime: {
     type: String,
