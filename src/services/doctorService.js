@@ -91,7 +91,7 @@ const doctorsSignin = async (params) => {
   try {
     const {email, password} = params;
 
-    const existingUser = await DoctorModel.findOne({email});
+    const existingUser = await Doctor.findOne({email});
     console.log(existingUser)
 
     if(!existingUser){{
@@ -145,7 +145,7 @@ const doctorsData = async (params) =>{
   try {
     const {email} = params;
 
-    const currentDoctor = await DoctorModel.findOne({email});
+    const currentDoctor = await Doctor.findOne({email});
     const data = globalFunctions.dataStripper(currentDoctor)
     if(currentDoctor){
       return{
@@ -168,7 +168,7 @@ const doctorsUpdate = async (params) => {
   try {
     const {Name, Phone, Email, Gender, Profession, id} = params;
 
-    const existingDoctor = await DoctorModel.findOne({_id: id})
+    const existingDoctor = await Doctor.findOne({_id: id})
 
     existingDoctor.name = Name,
     existingDoctor.profession = Profession,
@@ -202,7 +202,7 @@ const doctorsDelete = async (params) =>{
   try {
     const {id} = params;
 
-    const deleteDoctor = await DoctorModel.findByIdAndDelete({_id: id});
+    const deleteDoctor = await Doctor.findByIdAndDelete({_id: id});
 
     if(!deleteDoctor){
       return {

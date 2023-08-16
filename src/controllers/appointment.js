@@ -4,9 +4,15 @@ const appointment = require("../services/appointmentServices");
 const createAppointment =  async (req, res) =>{ 
     const data = await appointment.createAppointment(req.form);
     return response(res, data)
+};
+
+const getAvailableDoctors = async (req, res) => {
+    const data = await appointment.getAvailableDoctors(req.form);
+    return response(res, data)
 }
 
 
 module.exports = {
-    createAppointment
+    createAppointment,
+    getAvailableDoctors
 }

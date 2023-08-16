@@ -3,24 +3,17 @@ const { Auth } = require("../models");
 const { constants } = require("../configs");
 const {Available} = require("../models");
 const {Doctor} = require("../models")
-const {availableServices} = require("../services/avaibleServices");
+
 
 const createAppointment = async (params) => {
   try {
-    const { id, doctorId, appointmentDate, appointmentStartTime, appointmentEndTime, email} = params;
+    const { id, doctorsId, appointmentDate, appointmentStartTime, appointmentEndTime} = params;
 
-    const checkDr = await Doctor.findOne({_id: doctorId});
+    const checkDr = await Doctor.findOne({_id: doctorsId});
     if  (!checkDr){
       return {
         status: false,
         message: "Invalid doctor's Id"
-      }
-    }
-    const checkUser = await Auth.findOne({email});
-    if (!checkUser){
-      return {
-        status: false,
-        message: "Invalid Access token"
       }
     }
     const appointmentDayOfWeek = new Date(appointmentDate).getDay();
@@ -37,7 +30,7 @@ const createAppointment = async (params) => {
     }
   }
     const checkAvailableDr = await Available.findOne({
-      doctorsId: doctorId,
+      doctorsId: doctorsId,
       availableDate: appointmentDate,
       availableStartTime: appointmentStartTime,
       availableEndTime: appointmentEndTime
@@ -60,11 +53,10 @@ const createAppointment = async (params) => {
     // console.log(appointment);
 
       await Available.create({
-        doctorsId: doctorId,
+        doctorsId: doctorsId,
         availableDate: appointmentDate,
         availableStartTime: appointmentStartTime,
         availableEndTime: appointmentEndTime
-
       });
     return {
       status: true,
@@ -79,7 +71,43 @@ const createAppointment = async (params) => {
     };
   }
 };
+const getAvailableDoctors = async (params) => {
+  try {
+    
+    const {appointmentDate, appointmentStartTime, appointmentEndTime} = params;
+
+    const availableDoctors = await Available.find({
+      availableDate: appointmentDate,
+      availableStartTime:  appointmentStartTime,
+      availableEndTime: appointmentEndTime
+      // availableStartTime: {$lte: appointmentStartTime},
+      // availableEndTime: {$gte: appointmentEndTime}
+    }).populate("doctorsId");
+
+    // Map the available doctors' IDs
+    const availableDoctorIds = availableDoctors.map(doc => doc.doctorsId)
+
+    // Query Doctor collection to get detailed information of available doctors
+    const doctors = await Doctor.find({ _id: { $in: availableDoctorIds } });
+
+    return {
+      status: true,
+      message: "Available doctors retrieved successfully",
+      data: doctors,
+    };
+
+    
+  } catch (error) {
+    return {
+      status: false,
+      message: constants.SERVER_ERROR("getAvailableDoctors")
+    }
+    
+  }
+
+}
 
 module.exports = {
   createAppointment,
+  getAvailableDoctors
 };

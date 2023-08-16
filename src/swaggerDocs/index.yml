@@ -127,6 +127,12 @@ paths:
       summary: Geting a user
       produces:
         - application/json
+      parameters:
+        - in: header
+          name: authorization
+          description: token
+          default: 
+          required: true
       responses:
         200:
           description: should return successful
@@ -135,7 +141,7 @@ paths:
   /appointment:
     post:
       tags:
-        - Creating Appointment
+        - Appointment
       summary: Create appointment
       produces:
         - application/json
@@ -154,6 +160,25 @@ paths:
       responses: # server responses
         200:
           description: should return successful
+
+  # GetAvailableDotors route
+  /getAvailableDoctors:
+    get:
+      tags:
+        - Appointment
+      summary: Geting all available doctors
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: authorization
+          description: token
+          default: 
+          required: true
+      responses:
+        200:
+          description: should return successful
+
 
   # Creating Doctors record
   /doctorsSignup: # path of the collection from your endpoint
@@ -200,6 +225,12 @@ paths:
       summary: Geting a user
       produces:
         - application/json
+      parameters:
+        - in: header
+          name: authorization
+          description: token
+          default: 
+          required: true
       responses:
         200:
           description: should return successful
@@ -351,7 +382,7 @@ definitions: # Schema definition for request body
   appointment:
     type: object
     properties:
-      doctorId:
+      doctorsId:
         type: String
         default: ""
       appointmentDate:
@@ -382,7 +413,7 @@ definitions: # Schema definition for request body
         default: General Practitioner
       gender:
         type: String
-        default: "20/11/2000"
+        default: "M"
       password:
         type: String
         default: "save"

@@ -3,11 +3,22 @@ const jwt = require("jsonwebtoken");
 
 const { response } = require("../helpers");
 
+const publicEndPoint = [
+  "/signin",
+  "/doctorsSignup",
+  "/doctorsSignin"
+  // "/getAllUser"
+]
+
 module.exports = (obj) => {
   return (req, res, next) => {
     const schema = Joi.object().keys(obj).required().unknown(false);
-    let loggedInUser;
-
+    let loggedInUser; 
+    console.log(req.url)
+    if (req.headers.authorization === undefined && !publicEndPoint.includes(req.url)) {
+      return response(res, { status: false, message: "unauthorized access" });
+    }
+  
     if (req.headers.authorization) {
       const token = req.headers.authorization;
 
