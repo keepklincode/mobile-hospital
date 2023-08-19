@@ -5,8 +5,10 @@ const { response } = require("../helpers");
 
 const publicEndPoint = [
   "/signin",
+  "/signup",
   "/doctorsSignup",
-  "/doctorsSignin"
+  "/doctorsSignin",
+  "/getAvailableDoctors"
   // "/getAllUser"
 ]
 

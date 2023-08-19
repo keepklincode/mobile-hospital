@@ -150,6 +150,7 @@ const onBoarding = async (params) => {
 };
 
 const getAllUser = async (params) => {
+  console.log(params)
   try {
     let users = params
     users = await Auth.find();
@@ -158,12 +159,11 @@ const getAllUser = async (params) => {
       return {
         status: true,
         message: "Users found",
-        users,
         data
       }
     }
   } catch (error) {
-    // console.log(error)
+    console.log(error)
     return {
       status: false,
       message: constants.SERVER_ERROR("getAllUser"),

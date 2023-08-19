@@ -161,6 +161,30 @@ paths:
         200:
           description: should return successful
 
+  # Doctor Rating
+  /ratedoctor:
+    post:
+      tags:
+        - Authentication
+      summary: Doctor's rating performance
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: authorization
+          description: access token
+          default: 
+          required: true
+        - in: body
+          name: Rating doctor
+          description: Rating doctor's performance
+          required: true
+          schema: # Schema definition
+            $ref: "#/definitions/ratedoctor"
+      responses: # server responses
+        200:
+          description: should return successful
+
   # GetAvailableDotors route
   /getAvailableDoctors:
     get:
@@ -393,6 +417,16 @@ definitions: # Schema definition for request body
         default: ""
       appointmentEndTime:
         type: String
+        default: ""
+  # Doctor's rating
+  ratedoctor:
+    type: object
+    properties:
+      doctorId:
+        type: String
+        default: ""
+      rating:
+        type: Number
         default: ""
 
   # Doctor Definition

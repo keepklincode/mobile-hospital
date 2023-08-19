@@ -4,9 +4,10 @@ const homeRoute  = require("../controllers");
 const { validate } = require("../middlewares");
 const appointmentController = require("../controllers/appointment");
 const doctorController = require("../controllers/doctorController");
-const availableController = require("../controllers/availableController")
+const availableController = require("../controllers/availableController");
+const doctorRatingController = require("../controllers/doctorRatingController");
 
-const { auth, appointment, doctorsValidator, availableValidator} = require("../validator");
+const { auth, appointment, doctorsValidator, availableValidator, doctorRatingValidator} = require("../validator");
 
 
 const routes = express.Router();
@@ -32,6 +33,9 @@ routes.get("/getAvailableDoctors", validate(appointment.getAvailableDoctors), ap
 routes.post("/doctorsSignup", validate(doctorsValidator.doctorsSignup), doctorController.doctorsSignup);
 routes.post("/doctorsSignin", validate(doctorsValidator.doctorsSignin), doctorController.doctorsSignin);
 routes.get("/getAllDoctors", validate(doctorsValidator.getAllDoctors), doctorController.getAllDoctors);
+
+// Doctor Rating route
+routes.post("/ratedoctor", validate(doctorRatingValidator.rateDoctor), doctorRatingController.rateDoctor);
 
 
 routes.put("/doctorsUpdate", validate(doctorsValidator.doctorsUpdate), doctorController.doctorsUpdate);
