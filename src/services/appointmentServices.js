@@ -5,7 +5,6 @@ const { Available } = require("../models");
 const { Doctor } = require("../models");
 
 const createAppointment = async (params) => {
-  
   try {
     const {
       id,
@@ -22,6 +21,7 @@ const createAppointment = async (params) => {
         message: "Invalid doctor's Id",
       };
     }
+
     const appointmentDayOfWeek = new Date(appointmentDate).getDay();
     if (appointmentDayOfWeek === 0 || appointmentDayOfWeek === 6) {
       return {
@@ -77,62 +77,49 @@ const createAppointment = async (params) => {
     };
   }
 };
-const getAvailableDoctors = async (params) => {
 
+const getAvailableDoctors = async () => {
   try {
-    const {
-      appointmentDate,
-      appointmentStartTime,
-      appointmentEndTime,
-    } = params;
-
     const availableTime = [
-      {availableDateDate: "2023-08-18", availableStartTimeStartTime: "08:00", availableEndTime: "08:30"},
-      {availableDateDate: "2023-08-18", availableStartTimeStartTime: "08:30", availableEndTime: "09:00"},
-      {availableDateDate: "2023-08-18", availableStartTimeStartTime: "09:00", availableEndTime: "09:30"},
-      {availableDateDate: "2023-08-18", availableStartTimeStartTime: "09:30", availableEndTime: "10:00"},
+      { availableDate: "2023-08-18", availableStartTime: "08:00", availableEndTime: "08:30"},
+      { availableDate: "2023-08-18", availableStartTime: "08:30", availableEndTime: "09:00"},
+      { availableDate: "2023-08-18", availableStartTime: "09:00", availableEndTime: "09:30"},
+      { availableDate: "2023-08-18", availableStartTime: "09:30", availableEndTime: "10:00"},
+      { availableDate: "2023-08-18", availableStartTime: "10:30", availableEndTime: "11:00"},
+    ];
 
+    // Retrieve all available appointments from the database
+    const availableAppointments = await Available.find();
+    const doctors = await Doctor.find();
 
-     ];
-    // const availableDoctor = await Available.find({
-    //  const 
-    // })
+     const doctorsWithAvailableTime = doctors.map((doctor) => {
+      const availableSlots = availableTime.filter((timeSlot) => {
+        const matchingAppointment = availableAppointments.find((appointment) => {
+          const formattedDate = new Date(appointment.availableDate)
+            .toISOString()
+            .substr(0, 10);
+          return (
+            formattedDate === timeSlot.availableDate &&
+            appointment.availableStartTime === timeSlot.availableStartTime &&
+            appointment.availableEndTime === timeSlot.availableEndTime &&
+            appointment.doctorsId.equals(doctor._id)
+          );
+        });
 
-    // const availableDoctors = await Available.find({
-    //   availableDate: appointmentDate,
-    //   availableStartTime: appointmentStartTime ,
-    //   availableEndTime: appointmentEndTime,
-    // });
-    
-
- 
-    // return {
-    //   status: true,
-    //   message: "Available doctors retrieved successfully",
-    //   data: availableDoctors,
-    //   availableTime
-    // };
-    const availableDoctors = await Available.find({
-      availableDate: appointmentDate,
-      availableStartTime: { $ne: appointmentStartTime },
-      availableEndTime: { $ne: appointmentEndTime },
-    });
-
-    // Filter availableTime slots that are not contained in availableDoctors
-    const freeTimeSlots = availableTime.filter((timeSlot) => {
-      return !availableDoctors.some((doctor) => {
-        return (
-          doctor.availableDate === timeSlot.availableDate &&
-          doctor.availableStartTime === timeSlot.availableStartTime &&
-          doctor.availableEndTime === timeSlot.availableEndTime
-        );
+        return !matchingAppointment;
       });
+
+      return {
+        ...doctor.toObject(),
+        availableSlots,
+      };
     });
 
     return {
       status: true,
       message: "Available doctors retrieved successfully",
-      data: freeTimeSlots,
+      // availableTime: availableSlots,
+      doctorsWithAvailableTime,
     };
   } catch (error) {
     console.log(error);
@@ -143,7 +130,29 @@ const getAvailableDoctors = async (params) => {
   }
 };
 
+const bookedAppointment = async () => {
+  try {
+    const booked = await Available.find()
+    if (booked){
+      return{
+        status: true,
+      message: "Retrived booked appointment",
+      booked
+      }
+    };
+
+    
+  } catch (error) {
+    return {
+      status: false,
+      message: constants.SERVER_ERROR("bookedAppointment"),
+    };
+    
+  }
+}
+
 module.exports = {
   createAppointment,
   getAvailableDoctors,
+  bookedAppointment
 };

@@ -1,7 +1,7 @@
 require("dotenv").config;
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { DoctorModel } = require("../models");
+const { Doctor} = require("../models");
 const { Available } = require("../models");
 const { constants } = require("../configs");
 
@@ -49,7 +49,9 @@ const deleteAppointment = async (params) =>{
   } catch (error) {
     
   }
-}
+};
+
+
 
 module.exports = {
   availableDr,

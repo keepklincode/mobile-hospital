@@ -203,6 +203,23 @@ paths:
         200:
           description: should return successful
 
+  /bookedAppointment:
+    get:
+      tags:
+        - Appointment
+      summary: Getting Booked appointment
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: authorization
+          description: token
+          default: 
+          required: true
+      responses:
+        200:
+          description: should return successful
+
 
   # Creating Doctors record
   /doctorsSignup: # path of the collection from your endpoint

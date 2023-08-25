@@ -10,5 +10,8 @@ module.exports = {
 
     getAvailableDoctors: {
         id: Joi.string()
+    },
+    bookedAppointment: {
+        id: Joi.string
     }
 }

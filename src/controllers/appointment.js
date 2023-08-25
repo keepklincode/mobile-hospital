@@ -10,9 +10,13 @@ const getAvailableDoctors = async (req, res) => {
     const data = await appointment.getAvailableDoctors(req.form);
     return response(res, data)
 }
-
+const bookedAppointment = async (req, res) => {
+    const data = await appointment.bookedAppointment(res.form);
+    return response(res, data)
+}
 
 module.exports = {
     createAppointment,
-    getAvailableDoctors
+    getAvailableDoctors,
+    bookedAppointment
 }
