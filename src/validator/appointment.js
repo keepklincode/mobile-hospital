@@ -13,5 +13,12 @@ module.exports = {
     },
     bookedAppointment: {
         id: Joi.string
-    }
+    },
+
+    checkAppointmentVacancy: {
+        appointmentDate: Joi.date().required(),
+        appointmentStartTime: Joi.string().required(),
+        appointmentEndTime: Joi.string().required(),
+        doctorsId: Joi.string().required(),
+    },
 }

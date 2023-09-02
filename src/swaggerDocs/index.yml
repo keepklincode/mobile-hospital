@@ -160,6 +160,30 @@ paths:
       responses: # server responses
         200:
           description: should return successful
+    
+     # Checking appointment
+  /checkAppointmentVacancy:
+    post:
+      tags:
+        - Appointment
+      summary: Check appointment
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: authorization
+          description: access token
+          default:
+          required: true
+        - in: body
+          name: checking appointment
+          description: User Appointment
+          required: true
+          schema: # Schema definition
+            $ref: "#/definitions/checkAppointmentVacancy"
+      responses: # server responses
+        200:
+          description: should return successful
 
   # Doctor Rating
   /ratedoctor:
@@ -505,5 +529,21 @@ definitions: # Schema definition for request body
         type: String
         default: ""
       availableEndTime:
+        type: String
+        default: ""
+
+  checkAppointmentVacancy:
+    type: object
+    properties:
+      doctorsId:
+        type: String
+        default: ""
+      appointmentDate:
+        type: Date
+        default: "2023-09-11"
+      appointmentStartTime:
+        type: String
+        default: ""
+      appointmentEndTime:
         type: String
         default: ""
