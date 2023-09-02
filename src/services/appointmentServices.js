@@ -185,6 +185,7 @@ const checkAppointmentVacancy = async (params) => {
 const bookedAppointment = async () => {
   try {
     const booked = await Available.find();
+    console.log(booked)
     if (booked) {
       return {
         status: true,
