@@ -16,9 +16,10 @@ module.exports = {
     },
 
     checkAppointmentVacancy: {
-        appointmentDate: Joi.date().required(),
-        appointmentStartTime: Joi.string().required(),
-        appointmentEndTime: Joi.string().required(),
-        doctorsId: Joi.string().required(),
+        id: Joi.string()
+        // appointmentDate: Joi.date().required(),
+        // appointmentStartTime: Joi.string().required(),
+        // appointmentEndTime: Joi.string().required(),
+        // doctorsId: Joi.string().required(),
     },
 }

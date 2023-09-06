@@ -157,23 +157,52 @@ const checkAppointmentVacancy = async (params) => {
       appointmentEndTime,
     } = params;
 
-    const checkAppointment = await Available.find({});
 
-    if (
-      checkAppointment.doctorsId === doctorsId &&
-      checkAppointment.availableDate === appointmentDate &&
-      checkAppointment.availableStartTime === appointmentStartTime &&
-      checkAppointment.availableEndTime === appointmentEndTime
-    ) {
+    const isAvailable = await Available.findOne({
+    });
+
+    
+
+    const vacantTimeSlots = isAvailable.find((timeSlot) => {
+      
+         timeSlot.doctorsId === doctorsId && 
+         timeSlot.availableDate === appointmentDate &&
+         timeSlot.availableStartTime === appointmentStartTime &&
+         timeSlot.availableEndTime === appointmentEndTime
+    
+    });
+     
+    if (vacantTimeSlots){
       return {
-        status: false,
-        message: "Doctor has already been booked",
-      };
+                status: false,
+                message: "Doctor has already been booked",
+              };
+      
     }
+
+    
+   
+
+    // if(
+    //   isAvailable.doctorsId === doctorsId &&
+    //   isAvailable.availableDate === appointmentDate &&
+    //   isAvailable.availableStartTime == appointmentStartTime &&
+    //   isAvailable.availableEndTime === appointmentEndTime
+    //   ){
+    //   return {
+    //         status: false,
+    //         message: "Doctor has already been booked",
+    //       };
+      
+    // }
+
     return {
-      status: true,
-      message: "Doctor is free at this moment",
-    };
+        status: true,
+        message: "Doctor is free at this moment",
+        vacantTimeSlots
+      };
+
+
   } catch (error) {
     console.log(error);
     return {

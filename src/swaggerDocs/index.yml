@@ -162,8 +162,8 @@ paths:
           description: should return successful
     
      # Checking appointment
-  /checkAppointmentVacancy:
-    post:
+  /checkAppointmentVacancy/64db3add1e07dc3aca12ccc7/2023-08-18/10:30/11:0:
+    get:
       tags:
         - Appointment
       summary: Check appointment
@@ -175,12 +175,6 @@ paths:
           description: access token
           default:
           required: true
-        - in: body
-          name: checking appointment
-          description: User Appointment
-          required: true
-          schema: # Schema definition
-            $ref: "#/definitions/checkAppointmentVacancy"
       responses: # server responses
         200:
           description: should return successful
@@ -532,18 +526,18 @@ definitions: # Schema definition for request body
         type: String
         default: ""
 
-  checkAppointmentVacancy:
-    type: object
-    properties:
-      doctorsId:
-        type: String
-        default: ""
-      appointmentDate:
-        type: Date
-        default: "2023-09-11"
-      appointmentStartTime:
-        type: String
-        default: ""
-      appointmentEndTime:
-        type: String
-        default: ""
+  # checkAppointmentVacancy:
+  #   type: object
+  #   properties:
+  #     doctorsId:
+  #       type: String
+  #       default: ""
+  #     appointmentDate:
+  #       type: Date
+  #       default: "2023-09-11"
+  #     appointmentStartTime:
+  #       type: String
+  #       default: ""
+  #     appointmentEndTime:
+  #       type: String
+  #       default: ""
