@@ -29,7 +29,7 @@ routes.delete("/deleteUser", validate(auth.deleteUser), homeRoute.deleteUser);
 routes.post("/appointment", validate(appointment.createAppointment), appointmentController.createAppointment);
 routes.get("/getAvailableDoctors", validate(appointment.getAvailableDoctors), appointmentController.getAvailableDoctors);
 routes.get("/bookedAppointment", validate(appointment.bookedAppointment), appointmentController.bookedAppointment);
-routes.get("/checkAppointmentVacancy/:doctorsId/:appointmentDate/:appointmentStartTime/:appointmentEndTime", validate(appointment.checkAppointmentVacancy), appointmentController.checkAppointmentVacancy)
+routes.get("/checkAppointmentVacancy", validate(appointment.checkAppointmentVacancy), appointmentController.checkAppointmentVacancy)
 
 // Doctor Route
 routes.post("/doctorsSignup", validate(doctorsValidator.doctorsSignup), doctorController.doctorsSignup);

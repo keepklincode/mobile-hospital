@@ -119,7 +119,7 @@ const getAvailableDoctors = async () => {
 
       return {
         ...doctor.toObject(),
-        availableSlots: vacantTimeSlots,
+        vacantTimeSlots,
       };
     });
 
@@ -148,6 +148,8 @@ function addMinutes(time, minutes) {
   )}`;
 }
 
+
+
 const checkAppointmentVacancy = async (params) => {
   try {
     const {
@@ -157,52 +159,28 @@ const checkAppointmentVacancy = async (params) => {
       appointmentEndTime,
     } = params;
 
-
     const isAvailable = await Available.findOne({
+      doctorsId: doctorsId,
+      availableDate: appointmentDate,
+      availableStartTime: appointmentStartTime,
+      availableEndTime: appointmentEndTime,
     });
-
     
+    // const bookedSlot = 
+  
 
-    const vacantTimeSlots = isAvailable.find((timeSlot) => {
-      
-         timeSlot.doctorsId === doctorsId && 
-         timeSlot.availableDate === appointmentDate &&
-         timeSlot.availableStartTime === appointmentStartTime &&
-         timeSlot.availableEndTime === appointmentEndTime
-    
-    });
-     
-    if (vacantTimeSlots){
+    if (isAvailable) {
       return {
-                status: false,
-                message: "Doctor has already been booked",
-              };
-      
+        status: false,
+        message: "Doctor has already been booked",
+      };
     }
 
-    
-   
-
-    // if(
-    //   isAvailable.doctorsId === doctorsId &&
-    //   isAvailable.availableDate === appointmentDate &&
-    //   isAvailable.availableStartTime == appointmentStartTime &&
-    //   isAvailable.availableEndTime === appointmentEndTime
-    //   ){
-    //   return {
-    //         status: false,
-    //         message: "Doctor has already been booked",
-    //       };
-      
-    // }
-
     return {
-        status: true,
-        message: "Doctor is free at this moment",
-        vacantTimeSlots
-      };
-
-
+      status: true,
+      message: "Doctor is free at this moment",
+      isAvailable,
+    };
   } catch (error) {
     console.log(error);
     return {
@@ -211,10 +189,12 @@ const checkAppointmentVacancy = async (params) => {
     };
   }
 };
+
+
 const bookedAppointment = async () => {
   try {
     const booked = await Available.find();
-    console.log(booked)
+    console.log(booked);
     if (booked) {
       return {
         status: true,

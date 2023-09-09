@@ -162,22 +162,45 @@ paths:
           description: should return successful
     
      # Checking appointment
-  /checkAppointmentVacancy/64db3add1e07dc3aca12ccc7/2023-08-18/10:30/11:0:
-    get:
-      tags:
-        - Appointment
-      summary: Check appointment
+  /checkAppointmentVacancy:
+    get: # endpoint request type (post request)
+      tags: # Tag property
+        - STARTER # Value of the tag
+      summary: node starter project
       produces:
         - application/json
-      parameters:
+      parameters: # request parameters
         - in: header
           name: authorization
           description: access token
-          default:
+          default: 
           required: true
+        - name: doctorsId # name of parameter passed
+          in: query # parameters in the path
+          required: true 
+          default: 1
+          type: string
+        - name: appointmentDate # name of parameter passed
+          in: query # parameters in the path
+          required: true
+          default: 
+          type: string
+        - name: appointmentStartTime # name of parameter passed
+          in: query # parameters in the path
+          required: true
+          default: 
+          type: string
+        - name: appointmentEndTime # name of parameter passed
+          in: query # parameters in the path
+          required: true
+          default: 
+          type: string
+
       responses: # server responses
-        200:
-          description: should return successful
+        201:
+          description: node starter project
+
+  
 
   # Doctor Rating
   /ratedoctor:
