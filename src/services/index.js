@@ -94,13 +94,16 @@ const signIn = async (params) => {
 
     const data = globalFunctions.dataStripper(existingUser);
     const secretKey = process.env.SECRET;
+    const expiration = process.env.EXPIRATION;
     // const token = jwt.sign({ userId: user._id }, secretKey)
     const token = jwt.sign(
       {
         id: existingUser.id,
         email: existingUser.email,
         name: existingUser.name,
+        exp: Math.floor(Date.now() / 1000) + (60 * 60)
       },
+      
       secretKey
     );
 
@@ -150,7 +153,6 @@ const onBoarding = async (params) => {
 };
 
 const getAllUser = async (params) => {
-  console.log(params)
   try {
     let users = params
     users = await Auth.find();
@@ -172,8 +174,6 @@ const getAllUser = async (params) => {
 }
 
 const userData = async (params) => {
-  console.log(params);
-
   try {
     const { email } = params;
     const currentUser = await Auth.findOne({ email });

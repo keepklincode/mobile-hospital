@@ -165,8 +165,8 @@ paths:
   /checkAppointmentVacancy:
     get: # endpoint request type (post request)
       tags: # Tag property
-        - STARTER # Value of the tag
-      summary: node starter project
+        - Appointment # Value of the tag
+      summary: Checking available time
       produces:
         - application/json
       parameters: # request parameters

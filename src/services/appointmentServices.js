@@ -166,8 +166,13 @@ const checkAppointmentVacancy = async (params) => {
       availableEndTime: appointmentEndTime,
     });
     
-    // const bookedSlot = 
-  
+    const vacancy = {
+      doctorsId,
+      appointmentDate,
+      appointmentStartTime,
+      appointmentEndTime,
+    }
+    
 
     if (isAvailable) {
       return {
@@ -179,7 +184,7 @@ const checkAppointmentVacancy = async (params) => {
     return {
       status: true,
       message: "Doctor is free at this moment",
-      isAvailable,
+      vacancy
     };
   } catch (error) {
     console.log(error);
@@ -194,7 +199,6 @@ const checkAppointmentVacancy = async (params) => {
 const bookedAppointment = async () => {
   try {
     const booked = await Available.find();
-    console.log(booked);
     if (booked) {
       return {
         status: true,

@@ -14,9 +14,10 @@ const publicEndPoint = [
 
 module.exports = (obj) => {
   return (req, res, next) => {
+    
     const schema = Joi.object().keys(obj).required().unknown(false);
     let loggedInUser; 
-    console.log(req.url)
+    // console.log(req.url)
     if (req.headers.authorization === undefined && !publicEndPoint.includes(req.url)) {
       return response(res, { status: false, message: "unauthorized access" });
     }
@@ -43,7 +44,8 @@ module.exports = (obj) => {
 
     if (error) {
       console.log(error);
-      return response(res, { status: false, message: error.message });
+      return response(res, { 
+        status: false, message: error.message });
     }
 
     req.form = { ...vars, ...loggedInUser };
