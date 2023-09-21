@@ -94,7 +94,6 @@ const signIn = async (params) => {
 
     const data = globalFunctions.dataStripper(existingUser);
     const secretKey = process.env.SECRET;
-    const expiration = process.env.EXPIRATION;
     // const token = jwt.sign({ userId: user._id }, secretKey)
     const token = jwt.sign(
       {
